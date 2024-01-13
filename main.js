@@ -38,7 +38,7 @@ fin.position.x = -7.5;
 fin.position.z = -7.5;
 scene.add(fin);
 
-//Box
+//Walls
 const wallLength = 10; // The length of each wall segment.
 const wallHeight = 5; // The height of the walls.
 const wallDepth = 0.03; // The depth/thickness of the walls.
@@ -46,28 +46,18 @@ const wallGeo = new THREE.BoxGeometry(wallLength, wallHeight, wallDepth);
 const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
 
 for (let wall = 0; wall < 4; wall++) {
-  // Loop for 4 walls to form a square
   for (let i = 0; i < 4; i++) {
-    // 4 segments per wall
     const wallBox = new THREE.Mesh(wallGeo, wallMaterial);
 
     if (wall === 0) {
-      // First wall, along positive x-axis
-      wallBox.position.set(i * wallLength, 0, 0); // Offset for connection
+      wallBox.position.set(i * wallLength, 0, 0);
     } else if (wall === 1) {
-      // Second wall, along positive z-axis
-      wallBox.rotation.y = Math.PI / 2; // Rotate 90 degrees around the y-axis
+      wallBox.rotation.y = Math.PI / 2;
       wallBox.position.set(-5, 0, i * wallLength + 5);
     } else if (wall === 2) {
-      // Third wall, along negative x-axis
       wallBox.rotation.y = Math.PI / 2;
-      wallBox.position.set(35, 0, wallLength * i + 5); // Offset for connection
-    } else if (wall === 3) {
-      // Fourth wall, along negative z-axis
-      wallBox.position.set(i * wallLength, 0, 40); // Offset for connection
+      wallBox.position.set(35, 0, wallLength * i + 5);
     }
-
-    // Add the wallBox to the scene
     scene.add(wallBox);
   }
 }
@@ -118,23 +108,33 @@ for (let wall = 0; wall < 4; wall++) {
 // picWall.position.z = -5;
 // scene.add(picWall);
 
-// // Floor
-// const floor = new THREE.Mesh(
-//   new THREE.PlaneGeometry(20, 20),
-//   new THREE.MeshStandardMaterial({ map: floorTexture })
-// );
-// floor.rotation.x = -Math.PI * 0.5;
-// floor.position.y = 0;
-// scene.add(floor);
+// Floor
+const floorGeometry = new THREE.PlaneGeometry(10, 5);
+const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
+
+for (let i = 0; i < 4; i++) {
+  for (let k = 0; k < 8; k++) {
+    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+
+    floor.rotation.x = -Math.PI * 0.5;
+    floor.position.set(i * 10, -2.5, k * 5 + 2.5);
+    scene.add(floor);
+  }
+}
 
 // //Ceiling
-// const ceiling = new THREE.Mesh(
-//   new THREE.PlaneGeometry(20, 20),
-//   new THREE.MeshStandardMaterial({ map: ceilingTexture })
-// );
-// ceiling.rotation.x = Math.PI * 0.5;
-// ceiling.position.y = 5;
-// scene.add(ceiling);
+const ceilingGeometry = new THREE.PlaneGeometry(10, 5);
+const ceilingMaterial = new THREE.MeshStandardMaterial({ map: ceilingTexture });
+
+for (let i = 0; i < 4; i++) {
+  for (let k = 0; k < 8; k++) {
+    const ceiling = new THREE.Mesh(ceilingGeometry, ceilingMaterial);
+
+    ceiling.rotation.x = Math.PI * 0.5;
+    ceiling.position.set(i * 10, 2.5, k * 5 + 2.5);
+    scene.add(ceiling);
+  }
+}
 
 /**
  * Lights
