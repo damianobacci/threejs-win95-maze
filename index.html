@@ -8,11 +8,10 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="play">
-      <audio autoplay controls>
-        <source src="/audio/beat.mp3" type="audio/mpeg" />
-      </audio>
-    </div>
+    <button id="mute">Mute / Unmute</button>
+    <audio autoplay id="audio">
+      <source src="/audio/beat.mp3" type="audio/mpeg" />
+    </audio>
     <canvas class="webgl"></canvas>
     <script type="module" src="/main.js"></script>
   </body>

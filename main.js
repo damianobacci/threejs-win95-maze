@@ -34,6 +34,7 @@ const fin = new THREE.Mesh(
   new THREE.MeshStandardMaterial({ map: finTexture })
 );
 fin.position.z = 2;
+fin.position.x = -2;
 scene.add(fin);
 
 //Walls
@@ -55,9 +56,10 @@ for (let wall = 0; wall < 4; wall++) {
     } else if (wall === 2) {
       wallBox.rotation.y = Math.PI / 2;
       wallBox.position.set(35, 0, wallLength * i + 5);
-    } else if (wall === 3) {
-      wallBox.position.set(wallLength * i, 0, 40);
     }
+    // else if (wall === 3) {
+    //   wallBox.position.set(wallLength * i, 0, 40);
+    // }
     scene.add(wallBox);
   }
 }
@@ -176,12 +178,13 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   150
 );
-camera.position.x = 40;
-camera.position.y = 10;
-camera.position.z = 40;
+camera.position.x = 15;
+camera.position.y = 15;
+camera.position.z = 62;
+// camera.rotation.y = -Math.PI * 0.15;
+camera.rotation.x = -Math.PI * 0.1;
 scene.add(camera);
-
-// Controls
+//Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 
@@ -202,7 +205,6 @@ const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
-  // Update controls
   controls.update();
 
   // Render
@@ -213,3 +215,14 @@ const tick = () => {
 };
 
 tick();
+
+const audio = document.getElementById("audio");
+const muted = () => {
+  if (audio.muted) {
+    audio.muted = false;
+  } else {
+    audio.muted = true;
+  }
+};
+const mute = document.getElementById("mute");
+mute.addEventListener("click", muted);
