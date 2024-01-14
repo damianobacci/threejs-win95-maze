@@ -33,9 +33,7 @@ const fin = new THREE.Mesh(
   new THREE.CircleGeometry(1.5, 20),
   new THREE.MeshStandardMaterial({ map: finTexture })
 );
-fin.position.y = 2.5;
-fin.position.x = -7.5;
-fin.position.z = -7.5;
+fin.position.z = 2;
 scene.add(fin);
 
 //Walls
@@ -57,6 +55,8 @@ for (let wall = 0; wall < 4; wall++) {
     } else if (wall === 2) {
       wallBox.rotation.y = Math.PI / 2;
       wallBox.position.set(35, 0, wallLength * i + 5);
+    } else if (wall === 3) {
+      wallBox.position.set(wallLength * i, 0, 40);
     }
     scene.add(wallBox);
   }
@@ -140,18 +140,9 @@ for (let i = 0; i < 4; i++) {
  * Lights
  */
 // Ambient light
-const ambientLight = new THREE.AmbientLight("#ffffff", 0.5);
-gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
+const ambientLight = new THREE.AmbientLight("#ffffff", 1.8);
+gui.add(ambientLight, "intensity").min(2).max(3).step(0.001);
 scene.add(ambientLight);
-
-// Directional light
-const moonLight = new THREE.DirectionalLight("#ffffff", 1.5);
-moonLight.position.set(4, 5, -2);
-gui.add(moonLight, "intensity").min(0).max(1).step(0.001);
-gui.add(moonLight.position, "x").min(-5).max(5).step(0.001);
-gui.add(moonLight.position, "y").min(-5).max(5).step(0.001);
-gui.add(moonLight.position, "z").min(-5).max(5).step(0.001);
-scene.add(moonLight);
 
 /**
  * Sizes
@@ -180,14 +171,14 @@ window.addEventListener("resize", () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-  75,
+  45,
   sizes.width / sizes.height,
   0.1,
-  100
+  150
 );
-camera.position.x = 4;
-camera.position.y = 2;
-camera.position.z = 5;
+camera.position.x = 40;
+camera.position.y = 10;
+camera.position.z = 40;
 scene.add(camera);
 
 // Controls
