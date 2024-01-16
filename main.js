@@ -24,6 +24,8 @@ const wallTexture = textureLoader.load("/textures/wall.bmp");
 const picTexture = textureLoader.load("/textures/pic.bmp");
 const finTexture = textureLoader.load("/textures/fin.png");
 const ratTexture = textureLoader.load("/textures/rat.png");
+const startTexture = textureLoader.load("/textures/start2.png");
+const openTexture = textureLoader.load("textures/gl.png");
 
 /**
  * Maze
@@ -247,7 +249,38 @@ const wall12 = wall.clone();
 wall12.position.set(5, 0, 35);
 wall12.rotation.y = 0;
 scene.add(wall12);
-// //Rat
+
+//Rat
+const ratGeo = new THREE.PlaneGeometry(4.5, 2);
+const ratMesh = new THREE.MeshStandardMaterial({
+  map: ratTexture,
+  transparent: true,
+});
+const rat = new THREE.Mesh(ratGeo, ratMesh);
+rat.position.set(32.5, 0.5, 10);
+scene.add(rat);
+
+//Start
+
+const startGeo = new THREE.PlaneGeometry(5, 5);
+const startMesh = new THREE.MeshStandardMaterial({
+  map: startTexture,
+  transparent: true,
+});
+const start = new THREE.Mesh(startGeo, startMesh);
+start.position.set(22.5, 0.8, 32);
+scene.add(start);
+
+//OpenGel
+
+const openGeo = new THREE.PlaneGeometry(5, 5);
+const openMesh = new THREE.MeshStandardMaterial({
+  map: openTexture,
+  transparent: true,
+});
+const open = new THREE.Mesh(openGeo, openMesh);
+open.position.set(22.5, 0.8, 2.5);
+scene.add(open);
 
 //Pic wall
 const picWall = new THREE.Mesh(
@@ -289,6 +322,21 @@ for (let i = 0; i < 4; i++) {
     scene.add(ceiling);
   }
 }
+
+//Cone
+
+const coneGeometry = new THREE.ConeGeometry(1.8, 2, 5);
+const material = new THREE.MeshBasicMaterial({ color: 0x444444 });
+const cone = new THREE.Mesh(coneGeometry, material);
+cone.position.set(12.5, 0.8, 7);
+scene.add(cone);
+
+//Dodecahedron
+
+const dodecahedronGeometry = new THREE.DodecahedronGeometry(1.5, 0);
+const dodecahedron = new THREE.Mesh(dodecahedronGeometry, material);
+dodecahedron.position.set(22.5, 0.5, 22.5);
+scene.add(dodecahedron);
 
 /**
  * Lights
@@ -361,7 +409,11 @@ const tick = () => {
 
   // Render
   renderer.render(scene, camera);
-
+  cone.rotation.y += 0.02;
+  cone.rotation.z += 0.01;
+  dodecahedron.rotation.y += 0.02;
+  dodecahedron.rotation.z += 0.01;
+  rat.position.z = Math.sin(elapsedTime * 2) * 5.5 + 10;
   // Call tick again on the next frame
   window.requestAnimationFrame(tick);
 };
