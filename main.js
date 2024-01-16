@@ -249,16 +249,18 @@ wall12.rotation.y = 0;
 scene.add(wall12);
 // //Rat
 
-// //Pic wall
-// const picWall = new THREE.Mesh(
-//   new THREE.PlaneGeometry(10, 5),
-//   new THREE.MeshStandardMaterial({ map: picTexture })
-// );
-// picWall.rotation.y = -Math.PI * 0.5;
-// picWall.position.x = 10;
-// picWall.position.y = 2.5;
-// picWall.position.z = -5;
-// scene.add(picWall);
+//Pic wall
+const picWall = new THREE.Mesh(
+  new THREE.PlaneGeometry(10, 5),
+  new THREE.MeshStandardMaterial({ map: picTexture })
+);
+picWall.position.set(15, 0, 30.1);
+scene.add(picWall);
+
+const picWall2 = picWall.clone();
+picWall2.position.set(-4.9, 0, 15);
+picWall2.rotation.y = Math.PI * 0.5;
+scene.add(picWall2);
 
 // Floor
 const floorGeometry = new THREE.PlaneGeometry(10, 5);
