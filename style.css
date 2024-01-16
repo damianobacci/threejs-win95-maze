@@ -15,7 +15,7 @@ body {
   outline: none;
 }
 
-#mute {
+.controls {
   position: fixed;
   top: 0;
   left: 0;

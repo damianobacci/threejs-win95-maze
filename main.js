@@ -417,12 +417,13 @@ const tick = () => {
 tick();
 
 const audio = document.getElementById("audio");
-const muted = () => {
-  if (audio.muted) {
-    audio.muted = false;
-  } else {
-    audio.muted = true;
-  }
-};
-const mute = document.getElementById("mute");
-mute.addEventListener("click", muted);
+function playAudio() {
+  audio.play();
+}
+function pauseAudio() {
+  audio.pause();
+}
+const playButton = document.getElementById("play");
+const pauseButton = document.getElementById("pause");
+playButton.addEventListener("click", playAudio);
+pauseButton.addEventListener("click", pauseAudio);
