@@ -6,7 +6,7 @@ import GUI from "lil-gui";
  * Base
  */
 // Debug
-const gui = new GUI();
+// const gui = new GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -65,9 +65,7 @@ for (let wall = 0; wall < 4; wall++) {
   }
 }
 
-// // Walls
-// const walls = new THREE.Group();
-// scene.add(walls);
+// Walls
 
 const wall = new THREE.Mesh(wallGeo, wallMaterial);
 const halfWallGeo = new THREE.BoxGeometry(5, 5, wallDepth);
@@ -271,7 +269,7 @@ const start = new THREE.Mesh(startGeo, startMesh);
 start.position.set(22.5, 0.8, 32);
 scene.add(start);
 
-//OpenGel
+//OpenGl
 
 const openGeo = new THREE.PlaneGeometry(5, 5);
 const openMesh = new THREE.MeshStandardMaterial({
@@ -309,7 +307,7 @@ for (let i = 0; i < 4; i++) {
   }
 }
 
-// //Ceiling
+//Ceiling
 const ceilingGeometry = new THREE.PlaneGeometry(10, 5);
 const ceilingMaterial = new THREE.MeshStandardMaterial({ map: ceilingTexture });
 
@@ -343,7 +341,7 @@ scene.add(dodecahedron);
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight("#ffffff", 2.5);
-gui.add(ambientLight, "intensity").min(2).max(3).step(0.001);
+
 scene.add(ambientLight);
 
 /**
@@ -378,11 +376,9 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   150
 );
-camera.position.x = 15;
-camera.position.y = 15;
-camera.position.z = 62;
-// camera.rotation.y = -Math.PI * 0.15;
-camera.rotation.x = -Math.PI * 0.1;
+camera.position.x = 55;
+camera.position.y = 25;
+camera.position.z = 72;
 scene.add(camera);
 //Controls
 const controls = new OrbitControls(camera, canvas);
